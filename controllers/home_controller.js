@@ -1,3 +1,3 @@
 module.exports.home = function(req,res){
-   return res.end('Express is up for C odeial')
+   return res.end('Express is up for Codeial')
 };
