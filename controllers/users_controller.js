@@ -6,11 +6,19 @@ module.exports.profile=function(req,res){
 
 //Render Sign Up Page
 module.exports.signUp=function(req,res){
+    //is user is already authenticated then we donot need to sign in or sign up again so the same piece of code is written in both
+    //sign in and sign up module function
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_up',{title:"Codeial | Sign Up"});
 };
 
 //render Sign In page
 module.exports.signIn=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('user_sign_in',{title:"Codeial | Sign In"});
 };
 
@@ -37,4 +45,10 @@ module.exports.create=function(req,res){
 //Get the Sign data
 module.exports.createSession=function(req,res){
     // later in future
+    return res.redirect('/');
+};
+
+module.exports.destroySession=function(req,res){
+    req.logout(); //inbuilt function for logging user out or deleting the session cookie
+    return res.redirect('/');
 };
